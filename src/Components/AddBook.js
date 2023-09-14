@@ -4,23 +4,21 @@ import React, {useState} from 'react';
 import {
   TextField,
   Button,
-  Modal,
 } from "@mui/material";
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set,push } from 'firebase/database';
 import { app } from '../Database/firebase';
 
 import './Addbook.css';
 
 const AddBook = () => {
   const [book, setBook] = useState({
-    id: '',
     bookname: "",
     author: "",
   });
 
   const db = getDatabase(app);
 
-  const { id, bookname, author } = book;
+  const { bookname, author } = book;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,9 +30,7 @@ const AddBook = () => {
 
   const AddBook = (e) => {
     e.preventDefault();
-    if(book.id === ''){
-      alert('Please Enter Book Id');
-    }else if(book.bookname === '')
+    if(book.bookname === '')
     {
       alert('Please Enter Book Name');
     }else if(book.author === '')
@@ -42,11 +38,13 @@ const AddBook = () => {
       alert('Please Enter Book Author');
     }
     else{
-      set(ref(db, `booksdata/${id}`), {
-        id: id,
+      const newBook = push(ref(db, 'booksdata'));
+      set(newBook, {
         bookname: bookname,
         author: author,
       }).then((value) => { alert('Add Book Successfully'); }).catch((error) => alert("Error Adding Book"));
+
+      setBook('');
     }
   }
   return (
@@ -55,22 +53,11 @@ const AddBook = () => {
       <div className='header'>Add Book</div>
       < br />
         <label >
-          <b>ID</b>
-        </label>
-        <TextField
-          type="text"
-          value={book.id}
-          name="id"
-          onChange={handleChange}
-          required
-          size='small'
-        />
-        < br />
-        <label >
           <b>Name</b>
         </label>
         <TextField
           type="text"
+          placeholder='Enter Book Name'
           value={book.bookname}
           name="bookname"
           onChange={handleChange}
@@ -83,6 +70,7 @@ const AddBook = () => {
         </label>
         <TextField
           type="text"
+          placeholder='Enter Author Name'
           value={book.author}
           name="author"
           onChange={handleChange}
@@ -90,8 +78,7 @@ const AddBook = () => {
           size='small'
         />
         <br />
-        {/* <Button onClick={AddBook}> Add Book</Button> */}
-        <Button variant="contained" color="success" onClick={AddBook}>Add Book</Button>
+        <Button variant="contained" color="success" onClick={AddBook} style={{marginTop:'15px'}}>Add Book</Button>
       </div>
     </>
   )

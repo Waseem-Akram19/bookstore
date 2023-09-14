@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main_form{
+    display: flex;
+    /* background-color: rgb(22, 230, 230); */
+    background-color: #FF8066;
+    justify-content: flex-start;
+    width: 400px;
+    height: 450px;
+    margin: auto;
+    padding: 30px;
+    margin-top: 70px;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: larger;
+}

@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main_table{
+    display: flex;
+    background-color: #FF8066;
+    padding: 30px;
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+.header{
+    margin-bottom: 20px;
+}
+
+.addbook{
+    display: flex;
+    justify-content: start;
+    width: max-content;
+}
